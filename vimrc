@@ -1,3 +1,6 @@
+" Use the following in the .vim directory to clone all submodules:
+" git submodule update --init --recursive
+
 syntax enable
 set termguicolors
 set background=dark
@@ -21,8 +24,11 @@ set foldenable          " enable folding
 set foldlevelstart=10   " open most folds by default
 set foldnestmax=10      " nested fold max
 set foldmethod=indent   " fold based on indent level
+set splitright          " new windows open to right
+set scrolloff=5         " keep lines beyond cursor visible
 
-let mapleader=","       " leader is comma
+let mapleader=","               " leader is comma
+let g:netrw_dirhistmax = 0      " don't save netrw history
 
 " disable arrow keys
 noremap <Up> <NOP>
@@ -45,8 +51,22 @@ set colorcolumn=80
 
 set ttimeoutlen=10      " time to wait for keycode, fixes ESC delay
 
-set noshowmode          " hide default mode indicator
-python3 from powerline.vim import setup as powerline_setup
-python3 powerline_setup()
-python3 del powerline_setup
-set laststatus=2        " always show statusline
+set noshowmode          " hide default mode indicator, use airline instead
+
+let g:ale_linters = {'python': ['pyls']}
+let g:ale_fixers = {'python': ['yapf']}
+" Enable completion where available.
+let g:ale_completion_enabled = 1
+
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#tabline#enabled = 1     " Enable the list of buffers
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+
+
+" Load all plugins now.
+" Plugins need to be added to runtimepath before helptags can be generated.
+packloadall
+" Load all of the helptags now, after plugins have been loaded.
+" All messages and errors will be ignored.
+silent! helptags ALL
