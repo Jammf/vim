@@ -9,6 +9,9 @@ colorscheme gruvbox
 set tabstop=4			" number of visual spaces per TAB
 set softtabstop=4		" number of spaces in tab when editing
 set expandtab			" tabs are spaces
+set shiftwidth=4        " number of spaces that >> and << shift
+set autoindent
+set smartindent
 set number				" show line numbers
 set relativenumber      " use relative line numbers
 set showcmd				" show command in bottom bar
